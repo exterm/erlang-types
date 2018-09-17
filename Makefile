@@ -1,4 +1,4 @@
-.phony: plt example-1 example-2
+.phony: plt example-1 example-2 example-3
 
 plt: ~/.dialyzer_plt
 
@@ -18,3 +18,17 @@ example-2: plt
 	@echo
 	@echo "-- type analysis: --"
 	typer example-2.erl
+
+example-3: plt
+	@echo "-- source: --"
+	cat example-3.erl
+	@echo
+	@echo "-- type analysis: --"
+	typer example-3.erl
+
+check-example-3: plt
+	@echo "-- source: --"
+	cat example-3.erl
+	@echo
+	@echo "-- type analysis: --"
+	typer example-3.erl
