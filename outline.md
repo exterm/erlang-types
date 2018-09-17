@@ -37,3 +37,6 @@
   - subtypes and exhaustiveness
   - singleton types
   - discarded type information
+
+LYSE page on the dialyzer:
+https://learnyousomeerlang.com/dialyzer
