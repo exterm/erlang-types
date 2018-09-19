@@ -1,9 +1,12 @@
-.phony: prepare-mac mac-dependencies plt example-1 example-2 example-3
+.phony: clean prepare-mac mac-dependencies plt example-1 check-example-1
 
 plt: ~/.dialyzer_plt
 
 ~/.dialyzer_plt:
 	dialyzer --build_plt --apps erts kernel stdlib
+
+clean:
+	rm -f *.hi *.o
 
 example-1: plt
 	@echo "-- source: --"
@@ -12,26 +15,12 @@ example-1: plt
 	@echo "-- type analysis: --"
 	typer example-1.erl
 
-example-2: plt
+check-example-1: plt
 	@echo "-- source: --"
-	cat example-2.erl
+	cat example-1.erl
 	@echo
-	@echo "-- type analysis: --"
-	typer example-2.erl
-
-example-3: plt
-	@echo "-- source: --"
-	cat example-3.erl
-	@echo
-	@echo "-- type analysis: --"
-	typer example-3.erl
-
-check-example-3: plt
-	@echo "-- source: --"
-	cat example-3.erl
-	@echo
-	@echo "-- type analysis: --"
-	typer example-3.erl
+	@echo "-- type check: --"
+	dialyzer -Wunmatched_returns -Werror_handling example-1.erl
 
 prepare-mac: mac-dependencies plt
 
