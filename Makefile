@@ -1,4 +1,4 @@
-.phony: plt example-1 example-2 example-3
+.phony: prepare-mac mac-dependencies plt example-1 example-2 example-3
 
 plt: ~/.dialyzer_plt
 
@@ -32,3 +32,9 @@ check-example-3: plt
 	@echo
 	@echo "-- type analysis: --"
 	typer example-3.erl
+
+prepare-mac: mac-dependencies plt
+
+mac-dependencies:
+	brew install erlang
+	brew install ghc
