@@ -1,28 +1,15 @@
 -module('example-3').
 
--export([public1/0,
-         public2/0,
-         public3/0,
-         public4/0]).
+-compile(export_all).
 
-public1() ->
-    private_add(1, 2).
+-spec wait(non_neg_integer()) -> ok.
+wait(Milliseconds) ->
+    receive
+    after Milliseconds -> ok
+    end.
 
-public2() ->
-    private_add(1, 3).
-
-public3() ->
-    private_add(2, 3).
-
-private_add(A, B) ->
-    A + B.
-
-public4() ->
-    matching_demo(private_add(1,2)).
-
-%% -spec matching_demo(3 | 4 | 5) -> 1 | 2 | 3.
-matching_demo(A) ->
-    case A of
-        4 -> 1;
-        5 -> 2
+% actually, this works with things that are not integers
+wait2(Milliseconds) ->
+    receive
+    after Milliseconds -> ok
     end.
